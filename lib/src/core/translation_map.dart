@@ -16,7 +16,8 @@ class TranslationMap {
     _data[localeCode] = flattened;
   }
 
-  void _flattenMap(String prefix, Map<String, dynamic> source, Map<String, String> destination) {
+  void _flattenMap(String prefix, Map<String, dynamic> source,
+      Map<String, String> destination) {
     source.forEach((key, value) {
       final newKey = prefix.isEmpty ? key : '$prefix.$key';
       if (value is Map) {

@@ -30,7 +30,8 @@ class LingoWrapper extends StatefulWidget {
     final inherited = listen
         ? context.dependOnInheritedWidgetOfExactType<_InheritedLingo>()
         : context.getInheritedWidgetOfExactType<_InheritedLingo>();
-    assert(inherited != null, 'LingoWrapper widget bulunamadı. Lütfen widget ağacınızın üzerinde LingoWrapper olduğundan emin olun.');
+    assert(inherited != null,
+        'LingoWrapper widget bulunamadı. Lütfen widget ağacınızın üzerinde LingoWrapper olduğundan emin olun.');
     return inherited!.controller;
   }
 }
@@ -72,9 +73,10 @@ class _LingoWrapperState extends State<LingoWrapper> {
       future: _controllerFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return widget.loadingWidget ?? const Scaffold(
-            body: Center(child: CircularProgressIndicator()),
-          );
+          return widget.loadingWidget ??
+              const Scaffold(
+                body: Center(child: CircularProgressIndicator()),
+              );
         }
 
         if (snapshot.hasError) {

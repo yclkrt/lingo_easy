@@ -50,11 +50,13 @@ class HomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
-                    const Icon(Icons.waving_hand, size: 40, color: Colors.deepPurple),
+                    const Icon(Icons.waving_hand,
+                        size: 40, color: Colors.deepPurple),
                     const SizedBox(height: 12),
                     Text(
                       context.tr('welcome_message', params: {'name': 'Fatih'}),
-                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
                   ],
@@ -73,7 +75,8 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     const Text(
                       'Nested Key Translation:',
-                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.grey),
                     ),
                     const SizedBox(height: 8),
                     Text(
