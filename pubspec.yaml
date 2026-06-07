@@ -2,6 +2,8 @@ name: lingo_easy
 description: "Very easy multilingual support - Instant language switching, parameterized translation, and dynamic language addition."
 version: 1.0.0
 repository: https://github.com/yclkrt/lingo_easy
+homepage: https://github.com/yclkrt/lingo_easy
+issue_tracker: https://github.com/yclkrt/lingo_easy/issues
 
 environment:
   sdk: '>=3.0.0 <4.0.0'

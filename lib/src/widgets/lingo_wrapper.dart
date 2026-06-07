@@ -6,26 +6,32 @@ import '../core/json_loader.dart';
 class LingoWrapper extends StatefulWidget {
   final Widget child;
   final String defaultLocale;
-  final List<String> supportedLocales; // Burada tanımlı
+  final List<String> supportedLocales;
   final String assetsPath;
   final Map<String, Map<String, String>>? translations;
+  final Widget? loadingWidget;
 
   const LingoWrapper({
     super.key,
     required this.child,
     required this.defaultLocale,
-    required this.supportedLocales, // Zorunlu parametre
+    required this.supportedLocales,
     this.assetsPath = "assets/lang",
     this.translations,
+    this.loadingWidget,
   });
 
   @override
   State<LingoWrapper> createState() => _LingoWrapperState();
 
-  static LingoController of(BuildContext context) {
-    final state = context.findAncestorStateOfType<_LingoWrapperState>();
-    assert(state != null, 'LingoWrapper widget bulunamadı');
-    return state!._controller;
+  /// Hızlı erişim ve dinamik yeniden çizim için LingoController'ı döndürür.
+  /// [listen] parametresi false ise dil değiştiğinde çağıran widget rebuild olmaz (örn. Butonlar).
+  static LingoController of(BuildContext context, {bool listen = true}) {
+    final inherited = listen
+        ? context.dependOnInheritedWidgetOfExactType<_InheritedLingo>()
+        : context.getInheritedWidgetOfExactType<_InheritedLingo>();
+    assert(inherited != null, 'LingoWrapper widget bulunamadı. Lütfen widget ağacınızın üzerinde LingoWrapper olduğundan emin olun.');
+    return inherited!.controller;
   }
 }
 
@@ -43,10 +49,8 @@ class _LingoWrapperState extends State<LingoWrapper> {
     Map<String, Map<String, String>> translations;
 
     if (widget.translations != null) {
-      // Direkt map kullanımı
       translations = widget.translations!;
     } else {
-      // JSON'dan yükleme
       translations = await JsonTranslationLoader.loadFromAssets(
         assetsPath: widget.assetsPath,
         locales: widget.supportedLocales,
@@ -68,7 +72,7 @@ class _LingoWrapperState extends State<LingoWrapper> {
       future: _controllerFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Scaffold(
+          return widget.loadingWidget ?? const Scaffold(
             body: Center(child: CircularProgressIndicator()),
           );
         }
@@ -81,9 +85,31 @@ class _LingoWrapperState extends State<LingoWrapper> {
 
         return AnimatedBuilder(
           animation: _controller,
-          builder: (context, _) => widget.child,
+          builder: (context, _) {
+            return _InheritedLingo(
+              controller: _controller,
+              locale: _controller.currentLocale,
+              child: widget.child,
+            );
+          },
         );
       },
     );
+  }
+}
+
+class _InheritedLingo extends InheritedWidget {
+  final LingoController controller;
+  final String locale;
+
+  const _InheritedLingo({
+    required this.controller,
+    required this.locale,
+    required super.child,
+  });
+
+  @override
+  bool updateShouldNotify(_InheritedLingo oldWidget) {
+    return oldWidget.locale != locale;
   }
 }

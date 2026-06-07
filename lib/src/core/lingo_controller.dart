@@ -25,13 +25,17 @@ class LingoController extends ChangeNotifier {
   String translate(String key, {Map<String, String>? params}) {
     String? translated = _translationMap.translate(_currentLocale, key);
 
+    if (translated == null) {
+      return key;
+    }
+
     if (params != null) {
       params.forEach((paramKey, paramValue) {
         translated = translated!.replaceAll('{$paramKey}', paramValue);
       });
     }
 
-    return translated ?? '';
+    return translated!;
   }
 
   List<String> get availableLocales => _translationMap.availableLocales;
