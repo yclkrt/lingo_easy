@@ -1,0 +1,13 @@
+{
+  "welcome_message": "Hoş geldiniz, {name}!",
+  "app_title": "LingoEasy Örneği",
+  "button": {
+    "change_language": "Dili Değiştir",
+    "click_me": "Tıkla"
+  },
+  "nested": {
+    "deep": {
+      "text": "Bu iç içe geçmiş bir çeviri metnidir."
+    }
+  }
+}

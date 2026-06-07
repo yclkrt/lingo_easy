@@ -1,0 +1,13 @@
+{
+  "welcome_message": "Welcome, {name}!",
+  "app_title": "LingoEasy Demo",
+  "button": {
+    "change_language": "Change Language",
+    "click_me": "Click Me"
+  },
+  "nested": {
+    "deep": {
+      "text": "This is a nested translation text."
+    }
+  }
+}
