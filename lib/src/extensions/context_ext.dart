@@ -46,6 +46,8 @@ extension LingoContextExtension on BuildContext {
   /// Deprecated: Use [ln] instead.
   ///
   /// `context.tr()` will be removed in v2.0.0.
-  @Deprecated('Use context.ln() instead. context.tr() will be removed in v2.0.0.')
-  String tr(String key, {Map<String, String>? params}) => ln(key, params: params);
+  @Deprecated(
+      'Use context.ln() instead. context.tr() will be removed in v2.0.0.')
+  String tr(String key, {Map<String, String>? params}) =>
+      ln(key, params: params);
 }
