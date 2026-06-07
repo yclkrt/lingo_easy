@@ -15,7 +15,7 @@ A light, super-fast, and easy-to-use localization package for Flutter applicatio
 - 📂 **Nested JSON support:** Organize translation assets hierarchically (e.g., `"button.save"` maps to `{"button": {"save": "..."}}`).
 - 💬 **Parameterized Translations:** Replace placeholders dynamically (e.g., `"Welcome, {name}!"`).
 - ⚡ **Performance Optimized:** Avoid unnecessary rebuilds using smart extension methods.
-- 📦 **Zero Boilerplate:** Use intuitive BuildContext extensions to translate (`context.tr()`), change language (`context.setLocale()`), and retrieve active states.
+- 📦 **Zero Boilerplate:** Use intuitive BuildContext extensions to translate (`context.ln()`), change language (`context.setLocale()`), and retrieve active states.
 
 ---
 
@@ -27,7 +27,7 @@ Add `lingo_easy` to your `pubspec.yaml`:
 dependencies:
   flutter:
     sdk: flutter
-  lingo_easy: ^1.0.0
+  lingo_easy: ^1.1.0
 ```
 
 ---
@@ -120,12 +120,12 @@ Once configured, use the provided `BuildContext` extensions to translate values,
 
 ### Basic Translation
 ```dart
-Text(context.tr('app_title'))
+Text(context.ln('app_title'))
 ```
 
 ### Parameterized Translation
 ```dart
-Text(context.tr('welcome_message', params: {'name': 'Fatih'}))
+Text(context.ln('welcome_message', params: {'name': 'Fatih'}))
 // Output (English): Welcome, Fatih!
 // Output (Turkish): Hoş geldiniz, Fatih!
 ```
@@ -133,8 +133,8 @@ Text(context.tr('welcome_message', params: {'name': 'Fatih'}))
 ### Nested Keys (Dot-notation)
 Nested maps are automatically flattened at startup into dot-notation paths:
 ```dart
-Text(context.tr('button.click_me'))
-Text(context.tr('nested.deep.text'))
+Text(context.ln('button.click_me'))
+Text(context.ln('nested.deep.text'))
 ```
 
 ### Switch Language
@@ -144,7 +144,7 @@ ElevatedButton(
   onPressed: () {
     context.setLocale('tr'); // Switches locale to Turkish
   },
-  child: Text(context.tr('button.change_language')),
+  child: Text(context.ln('button.change_language')),
 )
 ```
 
@@ -160,10 +160,12 @@ print(context.availableLocales);  // ['en', 'tr']
 
 | Extension Method / Parameter | Return Type | Description | Rebuilds Widget? |
 | --- | --- | --- | --- |
-| `context.tr(String key, {Map<String, String>? params})` | `String` | Returns the translated string. Replaces placeholders in `{parameter}` format. Returns key if missing. | **Yes** |
+| `context.ln(String key, {Map<String, String>? params})` | `String` | Returns the translated string. Replaces placeholders in `{parameter}` format. Returns key if missing. | **Yes** |
 | `context.setLocale(String newLocale)` | `void` | Changes the active application locale and triggers reactive rebuilds. | No |
 | `context.currentLocale` | `String` | Returns the active locale code (e.g., `'en'`). | **Yes** |
 | `context.availableLocales` | `List<String>` | Returns all supported locale codes defined in the wrapper. | No |
+
+> **Migration note:** `context.tr()` is deprecated as of v1.1.0 and will be removed in v2.0.0. Please use `context.ln()` instead.
 
 ---
 

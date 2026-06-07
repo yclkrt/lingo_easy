@@ -1,3 +1,9 @@
+## 1.1.0
+
+* **New API – `context.ln()`:** Renamed the primary translation extension from `context.tr()` to `context.ln()` (short for *lingo*) for better clarity and global readability.
+* **Backward Compatibility:** `context.tr()` is still available but marked `@Deprecated` and will be removed in v2.0.0. Existing code continues to work without any changes.
+* **Updated Docs:** All README examples, API reference, and inline documentation updated to reflect `context.ln()`.
+
 ## 1.0.0
 
 * Initial release of `lingo_easy`!

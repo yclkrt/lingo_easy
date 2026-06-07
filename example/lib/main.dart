@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.tr('app_title')),
+        title: Text(context.ln('app_title')),
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                         size: 40, color: Colors.deepPurple),
                     const SizedBox(height: 12),
                     Text(
-                      context.tr('welcome_message', params: {'name': 'Fatih'}),
+                      context.ln('welcome_message', params: {'name': 'Fatih'}),
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
@@ -80,7 +80,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      context.tr('nested.deep.text'),
+                      context.ln('nested.deep.text'),
                       style: const TextStyle(fontSize: 16),
                     ),
                   ],
@@ -110,7 +110,7 @@ class HomeScreen extends StatelessWidget {
                 context.setLocale(nextLocale);
               },
               icon: const Icon(Icons.translate),
-              label: Text(context.tr('button.change_language')),
+              label: Text(context.ln('button.change_language')),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 backgroundColor: Theme.of(context).colorScheme.primaryContainer,

@@ -152,7 +152,7 @@ void main() {
               builder: (context) {
                 return Column(
                   children: [
-                    Text(context.tr('message')),
+                    Text(context.ln('message')),
                     ElevatedButton(
                       onPressed: () => context.setLocale('en'),
                       child: const Text('Change'),
